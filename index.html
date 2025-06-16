@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <style>
+        :root{
+            --white: #F2F2F2;
+            --darkPurple: #705CF2;
+            --shadowPurple: #5549A6;
+            --grey: #eee;
+            --green: #04D94F
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            margin: 0; 
+        }
+
+        #container{
+            display: grid;
+            height: 100%;
+            grid-template-columns: 1fr 5fr;
+            grid-template-rows: 1fr 4fr;
+        }
+
+        #sidebar{
+            background-color: var(--darkPurple);
+            grid-row: 1 / 3;
+        }
+
+        #main{
+            background-color: var(--white);
+            grid-column: 2;
+            grid-row: 2;
+            z-index: -1;
+        }
+
+        #header{
+            background-color: white;
+            box-shadow: 0 2px 4px #ccc;
+            z-index: 1
+        }
+
+        #menu{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .logo-container{
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .logo-container#head{
+            font-size: 1.7rem;
+            margin: 15px 10px 20px 10px;
+        }
+
+        .logo{
+            height: 35px;
+            width: auto;
+            margin: 10px;
+            filter: invert(1);
+        }
+
+        #menu > div:nth-child(2), #menu > div:nth-child(8){
+            margin-top: 20px;
+        }
+
+        #menu > div:nth-child(7){
+            margin-bottom: 20px;
+        }
+
+        #menu > div:hover{
+            background-color: var(--shadowPurple);
+        }
+
+        .logo-container#head:hover{
+            background-color: var(--darkPurple);
+        } 
+
+        #search-container img{
+            height: 25px;
+            margin-right: 20px;
+        }
+
+        #notification-icon:hover{
+            filter: invert(0.4);
+        }
+
+        #search-container{
+            display: flex;
+            margin: 30px 60px 20px 60px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        input[type="text"]{
+            appearance: none;
+            border: 0;
+            background-color: #ddd;
+            border-radius:10px;
+            height: 20px;
+            width: 40vw;
+        }
+
+        input[type="text"]:focus{
+            outline: 2px solid var(--darkPurple);
+        }
+
+        #search-container #user-icon{
+            height: 40px;
+            padding: 0 10px 0 20px;
+            border-radius: 50%;
+        }
+
+        #search-container span{
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        #search-container > .left, #search-container > .right{
+            display: flex;
+            align-items: center;
+        }
+
+        #button-container{
+            display: block;
+            grid-template-rows: 1fr 1fr 1fr;
+        }
+
+        #user-container{
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            margin: 0 60px 0 60px;
+        }
+
+        #user-container>.left>img{
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 17px;
+        }
+
+        #user-container>.left{
+            display: flex;
+            align-items: center;
+        }
+
+        #user-container > .left > #msg > p:first-child{
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
+
+        #user-container > .left > #msg > p:not(:first-child){
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-top: 5px;
+        }
+
+        #user-container>.right{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        #user-container>.right>button{
+            appearance: none;
+            border: none;
+            background-color: var(--darkPurple);
+            color: white;
+            border-radius: 20px;
+            height: 35px;
+            width: 90px;
+        }
+
+        #user-container>.right>button:hover{
+            background-color: var(--shadowPurple);
+        }
+
+        #main{
+            display: grid;
+            grid-template-columns: 4fr 3fr;
+            grid-template-rows: 1fr 1fr;
+            height: 80vh;
+        }
+
+        #main > #announcements,
+        #main > #trending,
+        #main > #projects{
+            display: grid;
+            margin: 5px 0 20px 20px;
+        }
+
+        #main > #projects{
+            grid-row: 1/3;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 20px 5fr 5fr 5fr;
+            gap: 20px;
+            height: 70vh;
+        }
+
+        #main > #projects > p{
+            grid-column: 1/3;
+            margin: 10px 0 0 0;
+            font-weight: bold;
+            vertical-align: baseline;
+        }
+
+        #main > #announcements > p,
+        #main > #trending > p{
+            grid-column: 1;
+            margin: 10px 0 0 0;
+            font-weight: bold;
+        }
+
+        .card{
+            background-color: white;
+            padding: 5px 20px;
+            box-shadow: 2px 4px 5px #ddd;
+        }
+
+        #main > #projects > .card{
+            border-left: 7px solid var(--green);
+            border-radius: 5px;
+        }
+
+        #main > #projects > .card > p:first-child{
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        #main > #projects > .card > p:not(:first-child){
+            position: relative;
+            right: 3px;
+            margin: 3px;
+            color: #444;
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
+
+        #main > #projects > .card > .icon-container > img{
+            height: 22px;
+            margin: 0 5px;
+        }
+
+        #main > #projects > .card > .icon-container{
+            display: flex;
+            justify-content: end;
+        }
+
+        #main > #announcements{
+            grid-template-rows: 40px 1fr 1fr 1fr;
+            width: 400px;
+        }
+
+        #main > #announcements > p{
+            grid-column: 1;
+        }
+
+        #main > #announcements > .card{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px 20px 0 20px;
+        }
+
+        #main > #announcements > .card:first-of-type,
+        #main > #trending > .card:first-of-type{
+            border-radius: 8px 8px 0 0;
+        }
+
+        #main > #announcements > .card:last-of-type,
+        #main > #trending > .card:last-of-type{
+            border-radius: 0 0 8px 8px;
+        }
+
+        #main > #announcements > .card > p:first-child{
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+        }
+
+        #main > #announcements > .card > p:not(:first-child){
+            font-size: 0.8rem;
+            margin:0;
+            padding-bottom: 20px;
+            border-bottom: solid 1px #ddd;
+        }
+
+        #main > #trending{
+            width: 400px;
+        }
+
+        #main > #trending > p:first-child{
+            margin: 0;
+        }
+
+        #main > #trending > .card{
+            display: flex;
+            align-items: center;
+            width: 90%;
+        }
+
+        #main > #trending > .card > img{
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        #main > #trending > .card > .user-name{
+            margin: 0;
+        }
+
+        #main > #trending > .card > .user-name > p:first-child{
+            color: #444;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+         
+        #main > #trending > .card > .user-name > p:not(:first-child){
+            color: #555;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <div id="menu">
+                <div class="logo-container" id="head">
+                    <img class="logo" src="Icons/sidebar/lightbulb-on-30.svg" alt="Lightbulb icon">Dashboard
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/home.svg" alt="Home icon">Home
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/card-account-details.svg" alt="Profile icon">Profile
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/message-fast-outline.svg" alt="Messages icon">Profile
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/history.svg" alt="History icon">History
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/file-document-multiple-outline.svg" alt="Tasks icon">Tasks
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/account-group.svg" alt="Communities icon">Communities
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/cog.svg" alt="Setting icon">Settings
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/help-circle.svg" alt="Support icon">Support
+                </div>
+
+                <div class="logo-container">
+                    <img class="logo" src="Icons/sidebar/security.svg" alt="Privacy icon">Privacy
+                </div>
+
+            </div>
+        </div>
+        <div id="header">
+            <div id="search-container">
+                <div class="left">
+                    <img src="Icons/header/magnify.svg" alt="Search button">
+                    <input type="text">
+                </div>
+
+                <div class="right">
+                    <img id = "notification-icon" src="Icons/header/bell-badge-outline.svg" alt="Notification icon">
+                    <span><img id="user-icon" src="Icons/header/loose-and-cute-icon_5-7-9-15.png" alt="User icon"> Morgan Oakley</span>
+                </div>
+            </div>
+
+            <div id="user-container">
+                <div class="left">
+                    <img src="Icons/header/loose-and-cute-icon_5-7-9-15.png" alt="User icon">
+                    <div id="msg">
+                        <p>Hi there,</p>
+                        <p>Morgan Oakley (@morgan)</p>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <button>New</button>
+                    <button>Upload</button>
+                    <button>Share</button>
+                </div>
+
+            </div>
+        </div>
+        <div id="main">
+            <div id="projects">
+                <p>Your Projects</p>
+                <div class="card">
+                    <p>Super Cool Project</p>
+                    <p>Sed tempus ut lacus ut scelerisque.</p>
+                    <p>Suspendisse sollicitudin nibh erat, id</p>
+                    <p>facilisis felis accumsan nec.</p>
+                    <div class="icon-container">
+                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
+                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <p>Less Cool Project</p>
+                    <p>Nuliam condimentum ipsum ut lectus vehicula</p>
+                    <p>consectetur. Quisque sed dolor tincidunt,</p>
+                    <p>consectetur sapien et, facilisis dolor. Duis sem</p>
+                    <p>purus, dignissim ut sapien in, varius pellentesque lacus.</p>
+
+                    <div class="icon-container">
+                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
+                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <p>Impossible App</p>
+                    <p>In hac habitasse platea dictumst. Vivamus</p>
+                    <p>dictum rutrum arcu, a placerat velit sagittis</p>
+                    <p>id.</p>
+                    <div class="icon-container">
+                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
+                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <p>Easy Peasy App</p>
+                    <p>Etiam cursus eros ac efficitur fringilla.</p>
+                    <p>Vestibulum dignissim urna eget accumsa</p>
+                    <p>aliquam. Curabitur dignissism nisi in tortor</p>
+                    <p>commodo, ac bibendum magna tincidunt.</p>
+                    <div class="icon-container">
+                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
+                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <p>Ad Blocker</p>
+                    <p>Quisque eget rutrum nisi. Nam augue</p> 
+                    <p>justo, cursus vitae metus vel, pharetra</p>
+                    <p>hendrerit fells. Aliquam sed malesuada</p>
+                    <p>eros.</p>
+                    <div class="icon-container">
+                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
+                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <p>Money maker</p>
+                    <p>Praesent convallis, libero quis congue</p>
+                    <p>elementum, nunc ante faucibus sapien, ac</p>
+                    <p>scelerisque tortor pururs sit amet ex.</p>
+                    <p>Pellentesque mollis nec sem vel aliquam.</p>
+                    <div class="icon-container">
+                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
+                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                    </div>
+                </div>
+            </div>
+
+            <div id="announcements">
+                <p>Announcements</p>
+                <div class="card">
+                    <p>Site Maintenance</p>
+                    <p>Vestibulum condimentum tellus lacus, in accumsan elit maximus ac. Donect hendreit 
+                        sodales congue...</p>
+                </div>
+
+                <div class="card">
+                    <p>Community Share Day</p>
+                    <p>nam vel lectus tincidunt, rutrum nulla et, ornare libero. Aliquam dictum accumsan portititor.</p>
+                </div>
+
+                <div class="card">
+                    <p>Updated Privacy Policy</p>
+                    <p>Phasellus efficitur nisi eget elit consectetur, eget condimentum ante auctor. charset
+                        fringilla saggitis sem in maattis. </p>
+                </div>
+
+            </div>
+
+            <div id="trending">
+                <p>Trending</p>
+                <div class="card">
+                    <img src="Icons/main/cute-alien-riding-ufo-with-korea-love-sign-hand-cartoon-vector-icon-illustration-science-technology_138676-9607.png" alt="User 1 icon">
+                    <div class="user-name">
+                        <p>@tegan</p>
+                        <p>World Peace Builder</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="Icons/main/loose-and-cute-icon_5-7-9-11.png" alt="User 2 icon">
+                    <div class="user-name">
+                        <p>@morgan</p>
+                        <p>Super Cool Project</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="Icons/main/お化け仮装の猫さん.jpg" alt="User 3 icon">
+                    <div class="user-name">
+                        <p>@kendall</p>
+                        <p>Life Changing App</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="Icons/main/元気な恐竜さんのアイコン.jpg" alt="User 4 icon">
+                    <div class="user-name">
+                        <p>@alex</p>
+                        <p>No Traffic Maker</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
