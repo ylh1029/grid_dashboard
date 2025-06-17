@@ -8,6 +8,44 @@
 </head>
 
 <body>
+    <div class="share-popup">
+        <span class="closeShare">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <p>Share this Page</p>
+        <p>Share this link via</p>
+        <div class="icons">
+            <ion-icon id="facebook" name="logo-facebook"></ion-icon>
+            <ion-icon id="twitter" name="logo-twitter"></ion-icon>
+            <ion-icon id="instagram" name="logo-instagram"></ion-icon>
+            <ion-icon id="whatsapp" name="logo-whatsapp"></ion-icon>
+            <ion-icon id="messages" name="chatbubble-outline"></ion-icon>
+        </div>
+
+        <p>Or copy link</p>
+        <div class="link-container">
+            <ion-icon name="link-outline"></ion-icon>
+            <input type="text" value="https://dashboard.com/morgan123" readonly>
+            <button class="copyBtn">Copy</button>
+        </div>
+    </div>
+
+    <div class="user-input">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <p>
+            <input type="text" required>
+            <label for="heading">Title</label>
+        </p>
+
+        <p>
+            <textarea name="main" id="main" required></textarea>
+            <label for="main">Description</label>
+        </p>
+
+        <button type="submit" class="submitPost">Post</button>
+    </div>
     <div id="sidebar" class="active">
         <div class="control">
             <ion-icon name="chevron-back-outline"></ion-icon>
@@ -85,9 +123,9 @@
                 </div>
 
                 <div class="right">
-                    <button>New</button>
-                    <button>Upload</button>
-                    <button>Share</button>
+                    <button id="new">New</button>
+                    <button id="upload">Upload</button>
+                    <button id="sharePage">Share</button>
                 </div>
 
             </div>
@@ -101,9 +139,9 @@
                     <p>Suspendisse sollicitudin nibh erat, id</p>
                     <p>facilisis felis accumsan nec.</p>
                     <div class="icon-container">
-                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
-                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
-                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                        <img class="star" src="Icons/main/star.svg" alt="Star icon">
+                        <img class="view" src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img class="share" src="Icons/main/share-outline.svg" alt="Share icon">
                     </div>
                 </div>
 
@@ -115,9 +153,9 @@
                     <p>purus, dignissim ut sapien in, varius pellentesque lacus.</p>
 
                     <div class="icon-container">
-                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
-                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
-                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                        <img class="star" src="Icons/main/star.svg" alt="Star icon">
+                        <img class="view" src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img class="share" src="Icons/main/share-outline.svg" alt="Share icon">
                     </div>
                 </div>
 
@@ -127,9 +165,9 @@
                     <p>dictum rutrum arcu, a placerat velit sagittis</p>
                     <p>id.</p>
                     <div class="icon-container">
-                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
-                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
-                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                        <img class="star" src="Icons/main/star.svg" alt="Star icon">
+                        <img class="view" src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img class="share" src="Icons/main/share-outline.svg" alt="Share icon">
                     </div>
                 </div>
                 
@@ -140,9 +178,9 @@
                     <p>aliquam. Curabitur dignissism nisi in tortor</p>
                     <p>commodo, ac bibendum magna tincidunt.</p>
                     <div class="icon-container">
-                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
-                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
-                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                        <img class="star" src="Icons/main/star.svg" alt="Star icon">
+                        <img class="view" src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img class="share" src="Icons/main/share-outline.svg" alt="Share icon">
                     </div>
                 </div>
 
@@ -153,9 +191,9 @@
                     <p>hendrerit fells. Aliquam sed malesuada</p>
                     <p>eros.</p>
                     <div class="icon-container">
-                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
-                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
-                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                        <img class="star" src="Icons/main/star.svg" alt="Star icon">
+                        <img class="view" src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img class="share" src="Icons/main/share-outline.svg" alt="Share icon">
                     </div>
                 </div>
 
@@ -166,9 +204,9 @@
                     <p>scelerisque tortor pururs sit amet ex.</p>
                     <p>Pellentesque mollis nec sem vel aliquam.</p>
                     <div class="icon-container">
-                        <img src="Icons/main/star-plus-outline.svg" alt="Favourite icon">
-                        <img src="Icons/main/eye-plus-outline.svg" alt="View icon">
-                        <img src="Icons/main/share-outline.svg" alt="Share icon">
+                        <img class="star" src="Icons/main/star.svg" alt="Star icon">
+                        <img class="view" src="Icons/main/eye-plus-outline.svg" alt="View icon">
+                        <img class="share" src="Icons/main/share-outline.svg" alt="Share icon">
                     </div>
                 </div>
             </div>

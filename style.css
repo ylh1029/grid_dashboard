@@ -3,17 +3,283 @@
     --mainColor: #705CF2;
     --shadeColor: #5549A6;
     --shade: #eee;
-    --subColor: #04D94F
+    --subColor: #04D94F;
 }
 
 body{
     margin: 0; 
     padding: 0;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     display: flex;
     flex-direction: row;
     flex-grow: 1;
+}
+
+.share-popup{
+    position: absolute;
+    width: 400px;
+    height: 240px;
+    border-radius: 10px;
+    top: 25%;
+    left: 41%;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    transform: scale(0);
+    transition: 0.5s ease;
+}
+
+.share-popup.open{
+    transform: scale(1);
+    transition: 0.5s ease;
+}
+
+.share-popup > p{
+    margin: 10px 20px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.share-popup > p:first-of-type{
+    font-size:1.4rem;
+    color: #222;
+    font-weight: bold;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #aaa;
+}
+
+.share-popup > .link-container{
+    margin: 10px 20px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.share-popup > .link-container > input[type="text"]{
+    appearance: none;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid var(--mainColor);
+    padding: 0 30px 0 40px;
+}
+
+.share-popup > .link-container > input[type="text"]:focus{
+    outline: none;
+}
+
+.share-popup > .link-container > button{
+    position: absolute;
+    appearance: none;
+    font-size: 1.2rem;
+    background-color: var(--mainColor);
+    border-radius: 4px;
+    border: 0;
+    color: white;
+    height: 35px;
+
+    top: 50%;
+    right:3%;
+    transform: translateY(-65%);
+}
+
+.share-popup > .link-container > button:hover{
+    cursor: pointer;
+    background-color: var(--shadeColor);
+}
+
+.share-popup > .link-container > ion-icon{
+    position: absolute;
+    padding-left: 5px;
+    top: 50%;
+    transform: translateY(-70%) rotate(-45deg);
+    left: 0;
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.closeShare{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--mainColor);
+    font-size: 2rem;
+    color: white;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.closeShare:hover{
+    cursor: pointer;
+    background-color: var(--shadeColor);
+}
+
+.icons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icons:hover{
+    cursor: pointer;
+}
+
+.icons > ion-icon{
+    font-size: 35px;
+    position: relative;
+}
+
+.icons > ion-icon:after{
+    position: absolute;
+    content: " ";
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    border-radius: 5px;
+    transform-origin: right;
+    transform:scaleX(0);
+    transition: transform 0.5s;
+}
+
+.icons > #instagram{
+    filter: invert(26%) sepia(68%) saturate(4780%) hue-rotate(349deg) brightness(97%) contrast(106%);
+}
+
+.icons > #facebook{
+    filter: invert(33%) sepia(31%) saturate(4925%) hue-rotate(203deg) brightness(100%) contrast(90%);
+}
+
+.icons > #twitter{
+    filter: invert(54%) sepia(50%) saturate(1510%) hue-rotate(175deg) brightness(91%) contrast(109%);
+}
+
+.icons > #whatsapp{
+    filter: invert(56%) sepia(91%) saturate(389%) hue-rotate(90deg) brightness(100%) contrast(92%);
+}
+
+.icons > #messages{
+    filter: invert(51%) sepia(68%) saturate(3303%) hue-rotate(89deg) brightness(128%) contrast(116%);
+}
+
+.user-input{
+    position: absolute;
+    width: 400px;
+    height: 440px;
+    border-radius: 10px;
+    top: 25%;
+    left: 41%;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: scale(0);
+    transition: 0.5s ease;
+}
+
+.user-input.open{
+    transform: scale(1);
+    transition: 0.5s ease;
+}
+
+.user-input > .icon-close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--mainColor);
+    font-size: 2.4rem;
+    color: white;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.user-input > .icon-close:hover{
+    cursor: pointer;
+    background-color: var(--shadeColor);
+}
+
+
+.user-input > p > input+label{
+    position: absolute;
+    margin: 5px;
+    top: 0;
+    size: 0.9rem;
+    left: 0;
+    transform: translateY(-70%);
+    transition: 0.3s ease;
+}
+
+.user-input > p > textarea + label{
+    position: absolute;
+    margin: 5px;
+    top: 0;
+    left: 0;
+    transform: translateY(-80%);
+}
+
+.user-input > p > input{
+    appearance: none;
+    width: 250px;
+    height: 60px;
+    border: 0;
+    background-color: #e6e6fa;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.user-input > p > input:focus{
+    outline: none;
+    border-bottom: 2px solid var(--mainColor);  
+}
+
+.user-input > p > textarea{
+    appearance: none;
+    outline: none;
+    border: 0;
+    background-color: #e6e6fa !important;
+    height: 250px;
+    width: 300px;
+    padding: 10px 5px;
+    resize: none;
+}
+
+.user-input > p > textarea:focus{
+    outline: none;
+    border: 0;
+    border-bottom: 2px solid var(--mainColor);
+}
+
+.user-input > p{
+    position: relative;
+}
+
+.user-input > button{
+    outline: none;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--mainColor);
+    color: white;
+    border: 0;
+}
+
+.user-input > button:hover{
+    cursor: pointer;
+    background-color: var(--shadeColor);
 }
 
 #sidebar{
@@ -185,7 +451,7 @@ body{
     justify-content: space-between;
 }
 
-input[type="text"]{
+#search-container input[type="text"]{
     appearance: none;
     border: 0;
     background-color: #e6e6fa;
@@ -196,7 +462,7 @@ input[type="text"]{
     padding: 5px;
 }
 
-input[type="text"]:focus{
+#search-container input[type="text"]:focus{
     outline: 2px solid var(--mainColor);
 }
 
@@ -319,7 +585,7 @@ input[type="text"]:focus{
 }
 
 #main > #projects > .card{
-    border-left: 7px solid var(--subColor);
+    border-left: 15px solid var(--subColor);
     border-radius: 5px;
 }
 
@@ -340,6 +606,15 @@ input[type="text"]:focus{
 #main > #projects > .card > .icon-container > img{
     height: 22px;
     margin: 0 5px;
+}
+
+#main > #projects > .card > .icon-container > img:hover{
+    cursor: pointer;
+    filter: invert(0.4);
+}
+
+#main > #projects > .card > .icon-container > .star.active{
+    filter: invert(85%) sepia(83%) saturate(7403%) hue-rotate(357deg) brightness(106%) contrast(102%);
 }
 
 #main > #projects > .card > .icon-container{
