@@ -78,7 +78,6 @@ body{
     border: 0;
     color: white;
     height: 35px;
-
     top: 50%;
     right:3%;
     transform: translateY(-65%);
@@ -122,48 +121,74 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 }
 
 .icons:hover{
     cursor: pointer;
 }
 
-.icons > ion-icon{
+.icons > .icon-wrapper{
     font-size: 35px;
+    display: inline-block;
     position: relative;
 }
 
-.icons > ion-icon:after{
+.icons > .icon-wrapper:after{
     position: absolute;
     content: " ";
     left: 0;
-    bottom: -6px;
+    top: 90%;
     width: 100%;
     height: 3px;
-    background-color: black;
     border-radius: 5px;
     transform-origin: right;
     transform:scaleX(0);
     transition: transform 0.5s;
 }
 
-.icons > #instagram{
+.icons > .icon-wrapper:nth-child(1):after{
+    background-color: #1877F2;
+}
+
+.icons > .icon-wrapper:nth-child(2):after{
+    background-color: #1DA1F2;
+}
+
+.icons > .icon-wrapper:nth-child(3):after{
+    background-color: #FD1D1D;
+}
+
+.icons > .icon-wrapper:nth-child(4):after{
+    background-color: #25D366;
+}
+
+.icons > .icon-wrapper:nth-child(5):after{
+    background-color: #00ff00;
+}
+
+.icons > .icon-wrapper:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.icons > .icon-wrapper > #instagram{
     filter: invert(26%) sepia(68%) saturate(4780%) hue-rotate(349deg) brightness(97%) contrast(106%);
 }
 
-.icons > #facebook{
+.icons > .icon-wrapper > #facebook{
     filter: invert(33%) sepia(31%) saturate(4925%) hue-rotate(203deg) brightness(100%) contrast(90%);
 }
 
-.icons > #twitter{
+.icons > .icon-wrapper > #twitter{
     filter: invert(54%) sepia(50%) saturate(1510%) hue-rotate(175deg) brightness(91%) contrast(109%);
 }
 
-.icons > #whatsapp{
+.icons > .icon-wrapper > #whatsapp{
     filter: invert(56%) sepia(91%) saturate(389%) hue-rotate(90deg) brightness(100%) contrast(92%);
 }
 
-.icons > #messages{
+.icons > .icon-wrapper > #messages{
     filter: invert(51%) sepia(68%) saturate(3303%) hue-rotate(89deg) brightness(128%) contrast(116%);
 }
 
@@ -429,10 +454,13 @@ body{
     transition: 0.5s ease;
 }
 
-.logo-container#head:hover, 
+.logo-container#head:hover{ 
+    background-color: var(--mainColor);
+    cursor:default;
+}
+
 #sidebar > .control:hover{
     background-color: var(--mainColor);
-    cursor:auto;
 }
 
 #search-container img{
